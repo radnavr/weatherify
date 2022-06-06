@@ -19,6 +19,7 @@ function passLocationName() {
   geoApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${openWeatherApiKey}`;
   console.log(geoApiUrl);
   getCityLocationData();
+
   photoApiUrl = `https://api.unsplash.com//search/photos?query=${city}&page=1&per_page=1&client_id=${unsplashApiKey}`;
   getPhoto();
 }
@@ -59,6 +60,7 @@ function displayCityLocationData(locData) {
 
 function passLocationData() {
   weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${openWeatherApiKey}&units=metric`;
+  console.log(weatherApiUrl);
   getCityWeatherData();
 }
 
@@ -71,7 +73,19 @@ function getCityWeatherData() {
 function displayCitiWeatherData(weathData) {
   let descriptionToDisplay = document.getElementById("weatherDescription");
   descriptionToDisplay.innerHTML = weathData.weather[0].description;
-
+  // img
+  let imgWeather = document.getElementById("imgWeather");
+  if (weathData.weather[0].main === "Clear") {
+    imgWeather.src =
+      "https://library.kissclipart.com/20181005/uew/kissclipart-sunshine-weather-icon-clipart-computer-icons-weath-0526af0fcaed8dd7.png";
+  } else if (weathData.weather[0].main === "Clouds") {
+    imgWeather.src =
+      "https://www.kindpng.com/picc/m/14-143069_weather-thunder-cloud-clouds-sunny-sun-cloud-hd.png";
+  } else {
+    imgWeather.src =
+      "https://www.shareicon.net/data/512x512/2017/04/05/882661_cloud_512x512.png";
+  }
+  // .
   let tempToDosplay = document.getElementById("temperature");
   tempToDosplay.innerHTML = "Temperature: " + weathData.main.temp + " °C";
 
