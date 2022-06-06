@@ -17,10 +17,8 @@ carryOutSearch.addEventListener("click", passLocationName);
 function passLocationName() {
   city = document.getElementById("cityName").value;
   geoApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${openWeatherApiKey}`;
-  let headDisplay = document.getElementById("heading");
-  headDisplay.innerHTML = city;
+  console.log(geoApiUrl);
   getCityLocationData();
-
   photoApiUrl = `https://api.unsplash.com//search/photos?query=${city}&page=1&per_page=1&client_id=${unsplashApiKey}`;
   getPhoto();
 }
@@ -44,6 +42,9 @@ function getCityLocationData() {
 }
 
 function displayCityLocationData(locData) {
+  let headDisplay = document.getElementById("heading");
+  headDisplay.innerHTML = locData[0].name;
+
   let latToDisplay = document.getElementById("latitude");
   latToDisplay.innerHTML = "latitude: " + locData[0].lat;
   latitude = locData[0].lat;
